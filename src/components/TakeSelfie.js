@@ -10,7 +10,7 @@ import {
 } from 'face-api.js/dist/face-api'
 import { Button } from 'antd'
 
-export default function VerifyId({ history }) {
+export default function TakeSelfie({ history }) {
   const interval = React.useRef(null)
   const videoEl = React.useRef()
   const [snapShot, setSnapshot] = React.useState(false)
@@ -54,7 +54,7 @@ export default function VerifyId({ history }) {
       draw.drawDetections(canvas, resizedDetections)
       draw.drawFaceLandmarks(canvas, resizedDetections)
       draw.drawFaceExpressions(canvas, resizedDetections)
-      if (!!detections.length) {
+      if (!!detections.length && detections[0].expressions.happy > 0.99) {
         canvas.getContext('2d').drawImage(videoEl.current, 0, 0, 720, 560)
         takeSelfie(canvas.toDataURL('image/png'))
       }
@@ -65,7 +65,7 @@ export default function VerifyId({ history }) {
     setSnapshot(true)
     videoEl.current.removeEventListener('playing', checkFace)
     clearInterval(interval.current)
-    localStorage.setItem('id', src)
+    localStorage.setItem('selfie', src)
   }
 
   return (
@@ -79,7 +79,7 @@ export default function VerifyId({ history }) {
         height: '100vh'
       }}
     >
-      <h1 style={{ position: 'fixed', top: '50px' }}>Verificar ID</h1>
+      <h1 style={{ position: 'fixed', top: '50px' }}>Sonrie</h1>
       <video
         style={{ border: '1px solid black' }}
         width="720"
@@ -96,7 +96,7 @@ export default function VerifyId({ history }) {
             bottom: '3%',
             right: '3%'
           }}
-          onClick={() => history.push('/take-selfie')}
+          onClick={() => history.push('/signature')}
         >
           Siguiente
         </Button>
