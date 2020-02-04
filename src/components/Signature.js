@@ -27,16 +27,21 @@ export default function Signature({ history }) {
         alignItems: 'center',
         justifyContent: 'space-evenly',
         width: '100vw',
-        height: '100vh'
+        height: '100vh',
+        boxSizing: 'border-box',
+        padding: '20px'
       }}
     >
       <h1>Sign</h1>
       <canvas
         onMouseOver={startSign}
         ref={canvasEl}
-        style={{ position: 'inherit', border: '1px solid black' }}
-        width="720"
-        height="560"
+        style={{
+          position: 'inherit',
+          border: '1px solid black',
+          width: '80%',
+          height: '80%'
+        }}
       ></canvas>
       <Button
         onClick={() => signaturePad.clear()}
