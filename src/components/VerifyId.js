@@ -31,10 +31,12 @@ export default function VerifyId({ history }) {
   })
 
   function startVideo() {
-    navigator.mediaDevices
-      .getUserMedia({ video: {} })
-      .then(stream => (videoEl.current.srcObject = stream))
-      .catch(err => console.log(err))
+    if ('mediaDevices' in navigator) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(stream => (videoEl.current.srcObject = stream))
+        .catch(err => console.log(err))
+    }
   }
 
   function checkFace() {
@@ -46,7 +48,10 @@ export default function VerifyId({ history }) {
     }
     matchDimensions(canvas, displaySize)
     interval.current = setInterval(async () => {
-      const detections = await detectAllFaces(videoEl.current, new TinyFaceDetectorOptions())
+      const detections = await detectAllFaces(
+        videoEl.current,
+        new TinyFaceDetectorOptions()
+      )
         .withFaceLandmarks()
         .withFaceExpressions()
       const resizedDetections = resizeResults(detections, displaySize)
