@@ -25,29 +25,23 @@ export default function Signature({ history }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         width: '100vw',
-        height: '100vh',
-        boxSizing: 'border-box',
-        padding: '20px'
+        height: '100vh'
       }}
     >
-      <h1>Sign</h1>
       <canvas
         onMouseOver={startSign}
         ref={canvasEl}
-        style={{
-          position: 'inherit',
-          border: '1px solid black',
-          width: '80%',
-          height: '80%'
-        }}
+        style={{ position: 'inherit', border: '1px solid black' }}
+        width="320"
+        height="240"
       ></canvas>
       <Button
         onClick={() => signaturePad.clear()}
         style={{
           position: 'fixed',
-          bottom: '9%',
+          bottom: '30%',
           right: '3%'
         }}
       >
@@ -57,7 +51,7 @@ export default function Signature({ history }) {
         onClick={sign}
         style={{
           position: 'fixed',
-          bottom: '3%',
+          bottom: '15%',
           right: '3%'
         }}
         type="primary"
