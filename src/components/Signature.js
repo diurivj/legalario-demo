@@ -30,18 +30,19 @@ export default function Signature({ history }) {
         height: '100vh'
       }}
     >
+      <h1>Firmar</h1>
       <canvas
         onMouseOver={startSign}
         ref={canvasEl}
         style={{ position: 'inherit', border: '1px solid black' }}
-        width="320"
-        height="240"
+        width="720"
+        height="560"
       ></canvas>
       <Button
         onClick={() => signaturePad.clear()}
         style={{
           position: 'fixed',
-          bottom: '30%',
+          bottom: '9%',
           right: '3%'
         }}
       >
@@ -51,7 +52,7 @@ export default function Signature({ history }) {
         onClick={sign}
         style={{
           position: 'fixed',
-          bottom: '15%',
+          bottom: '3%',
           right: '3%'
         }}
         type="primary"
